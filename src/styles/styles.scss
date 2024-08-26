@@ -1,0 +1,41 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    background-color:rgb(208, 208, 208, 0.3);
+}
+
+
+.mat-mdc-form-field.mat-form-field-appearance-fill {
+    /* Disabled */
+    &.mat-form-field-disabled {
+        opacity: 1 !important;
+    }
+}
+
+
+.theme-amber.light .mdc-text-field--disabled .mdc-text-field__input {
+  color: #4A4A4A !important;
+  cursor: not-allowed !important;
+}
+
+.theme-amber.light .mdc-text-field--disabled {
+  background-color: #EEEEEE !important;
+}
+
+
+
+.theme-amber.dark .mdc-text-field--disabled .mdc-text-field__input {
+  color: #E2E3E5 !important;
+}
+
+
+/* background: rgba(0, 0, 0, 0.3); */
+/* .form-field-flex {
+  background: rgba(237, 37, 37, 0.3)!important;
+  
+} */
+
+

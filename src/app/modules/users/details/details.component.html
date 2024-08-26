@@ -1,0 +1,176 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+    
+    <!-- Main -->
+    <div
+    class="flex-auto p-3 sm:p-4 overflow-y-auto"
+    cdkScrollable>
+        <!-- Back -->
+        <a
+        class="inline-flex items-center leading-6 text-accent hover:underline hover:text-primary"
+        [routerLink]="['..']">
+            <span class="inline-flex items-center">
+                <mat-icon
+                    class="icon-size-5 text-current"
+                    [svgIcon]="'heroicons_solid:arrow-small-left'"></mat-icon>
+                <span class="ml-1.5 font-medium leading-5">Volver</span>
+            </span>
+        </a>
+        <div class="flex-auto bg-card rounded-lg">
+            <div class="flex p-5">
+                <span class="text-xl md:text-3xl text-primary font-medium">{{title}}</span>
+            </div>
+            <mat-divider></mat-divider>
+            <form [formGroup]="UserForm" class="flex flex-col px-6 rounded overflow-y-auto ">
+                <ng-container >
+                    <!-- Section -->
+                    <div class="flex items-center my-5">
+                        <div class="text-xl text-primary font-medium">Datos del usuario</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-x-4 w-full mb-5">
+                        <div class="flex md:col-span-3">
+                            <mat-form-field class="flex-auto fuse-mat-dense" >
+                                <mat-label>Perfil</mat-label>
+                                <mat-select [formControlName]="'profile'" class="uppercase">
+                                    <ng-container *ngFor="let profile of Profiles">
+                                        <mat-option class="whitespace-nowrap divide-y" [value]="profile.id"><span class="uppercase whitespace-nowrap">{{profile.name}}</span>
+                                        </mat-option>
+                                    </ng-container>
+                                </mat-select>
+                                <mat-icon class="icon-size-5" matPrefix [svgIcon]="'mat_solid:manage_accounts'"></mat-icon>
+                                <mat-error *ngIf="UserForm.get('profile').invalid">
+                                    Ingrese dato valido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex md:col-span-2">
+                            <mat-form-field class="flex-auto fuse-mat-dense" >
+                                <mat-label>Número Identificación</mat-label>
+                                <input [formControlName]="'num_doc'" matInput type="number">
+                                <mat-error *ngIf="UserForm.get('num_doc').invalid">
+                                    Ingrese dato valido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex md:col-span-4">
+                            <mat-form-field class="flex-auto fuse-mat-dense" >
+                                <mat-label>Nombre</mat-label>
+                                <input [formControlName]="'name'" matInput type="text" class="uppercase">
+                                <mat-error *ngIf="UserForm.get('name').invalid">
+                                    Ingrese dato valido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="flex md:col-span-2">
+                            <mat-form-field class="flex-auto fuse-mat-dense" >
+                                <mat-label>Estado</mat-label>
+                                <mat-select [formControlName]="'third_status'" class="uppercase">
+                                    <ng-container *ngFor="let status of Status">
+                                        <mat-option class="whitespace-nowrap divide-y" [value]="status.id"><span class="uppercase whitespace-nowrap">{{status.name}}</span>
+                                        </mat-option>
+                                    </ng-container>
+                                </mat-select>
+                                <mat-error *ngIf="thirdForm.get('third_status').invalid">
+                                    El dato no es valido
+                                </mat-error>
+                            </mat-form-field>
+                        </div> -->
+                        <div class="flex md:col-span-2">
+                            <mat-form-field class="flex-auto fuse-mat-dense" >
+                                <mat-label>Celular</mat-label>
+                                <input [formControlName]="'celular'" matInput type="text" maxLength="10">
+                                <mat-error *ngIf="UserForm.get('celular').invalid">
+                                    Ingrese dato valido. Requiere 10 dígitos
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex md:col-span-3">
+                            <mat-form-field class="flex-auto fuse-mat-dense" >
+                                <mat-label>Correo</mat-label>
+                                <input [formControlName]="'email'" matInput type="text" class="lowercase">
+                                <mat-error *ngIf="UserForm.get('email').invalid">
+                                    El dato no es valido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        
+                        
+
+                        
+                        
+                        <!-- <div class="flex md:col-span-4">
+                            <mat-form-field class="flex-auto fuse-mat-dense">
+                                <mat-label>Licencia trailer reverso (jpg, png)</mat-label>
+                                <input [formControlName]="'trailer_property_card_back'" matInput [placeholder]="''">
+                            </mat-form-field>
+                            <div class="flex ml-4 items-center">
+                                <div class="mr-4">
+                                    <button mat-mini-fab color="default" class="rounded-full" (click)="seeImage(imageFileInputTrailerPropertyCardBack.files, 'trailer_property_card_back')"> 
+                                       <mat-icon class="" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                                       <label class="flex items-center justify-center rounded-full cursor-pointer" matRipple>
+                                       </label>
+                                    </button>
+                                </div>
+                                <div class="file-input-container">
+                                    <input id="image-file-input-trailer_property_card_back" class="absolute h-0 w-0 opacity-0 invisible pointer-events-none" type="file"
+                                       [multiple]="false"
+                                       [accept]="'image/jpeg, image/png'" 
+                                       (change)="uploadFile(imageFileInputTrailerPropertyCardBack.files, 'trailer_property_card_back')"
+                                       #imageFileInputTrailerPropertyCardBack>
+                                    <button mat-mini-fab color="primary" class="border-solid border border-primary rounded-full" (click)="imageFileInputTrailerPropertyCardBack.click()"> 
+                                       <mat-icon class="" [svgIcon]="'heroicons_solid:paper-clip'"></mat-icon>
+                                       <label class="flex items-center justify-center rounded-full cursor-pointer" matRipple>
+                                       </label>
+                                    </button>
+                                </div>
+                            </div>
+                        </div> -->
+
+                    </div>
+
+                    <!-- Section -->
+                    <div class="flex items-center mt-0 mb-4">
+                        <div class="text-xl text-primary font-medium">Asociar a Tercero</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-x-4 w-full mb-5">
+                        <div class="flex md:col-span-2">
+                            <mat-form-field class="flex-auto fuse-mat-dense" >
+                                <mat-label>Documento Tercero</mat-label>
+                                <input [formControlName]="'doc_third'" matInput type="number" (blur)="changeThird($event)">
+                                <mat-error *ngIf="UserForm.get('doc_third').invalid">
+                                    El dato no es valido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex md:col-span-5">
+                            <mat-form-field class="flex-auto fuse-mat-dense" >
+                                <mat-label>Nombre Tercero</mat-label>
+                                <input [formControlName]="'name_third'" matInput type="text" class="uppercase">
+                                <mat-error *ngIf="UserForm.get('name_third').invalid">
+                                    El dato no es valido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                
+                </ng-container>
+            </form>
+            <div class="flex justify-between border-t-2  p-4" >
+                <div>
+                    <button mat-raised-button color="default" [routerLink]="['..']">
+                        <mat-icon class="icon-size-5t" matPrefix [svgIcon]="'mat_solid:arrow_back'"></mat-icon>
+                        <span class="ml-2"> Salir </span>
+                    </button>
+                </div>
+                <button mat-raised-button class="text-accent mx-4" type="submit" [color]="'primary'" (click)="submit()" [disabled]="disableSave">
+                    <mat-icon class="icon-size-5t" matPrefix [svgIcon]="'mat_solid:save'"></mat-icon>
+                    <span class="ml-2"> Guardar </span>
+                </button>            
+            </div>
+        </div>
+        <!-- Back -->
+    </div>
+</div>
+
+
+

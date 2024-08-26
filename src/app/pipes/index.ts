@@ -1,0 +1,1 @@
+export * from 'app/pipes/hora-format.pipe';

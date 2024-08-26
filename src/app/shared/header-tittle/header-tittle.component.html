@@ -1,0 +1,112 @@
+<div class="flex flex-row flex-0 sm:items-center sm:justify-between px-8 py-4 border-b bg-card dark:bg-transparent">
+    <div class="flex-1 min-w-0 content-start">
+        <!-- Title -->
+        <div class="mt-0">
+            <h3 class="text-primary text-2xl md:text-3xl tracking-tight sm:leading-10 truncate font-semibold">
+                {{tittle}}
+            </h3>
+        </div>
+    </div>
+    <!-- Actions -->
+    <div class="content-start flex shrink-0">
+        <div class="flex shrink-0 items-center sm:mt-0 sm:ml-4 " (click)="add()">
+            <button mat-icon-button>
+                <mat-icon class="icon-size-6 text-primary" [svgIcon]="'mat_solid:add'"></mat-icon>
+            </button>
+        </div>
+        <div class="flex shrink-0 items-center sm:mt-0 sm:ml-4 " (click)="remove()">
+            <button mat-icon-button>
+                <mat-icon class="icon-size-6 text-primary" [svgIcon]="'mat_solid:remove'"></mat-icon>
+            </button>
+        </div>
+        <div class="flex shrink-0 items-center sm:mt-0 sm:ml-4 " (click)="refresh()">
+            <button mat-icon-button>
+                <mat-icon class="icon-size-6 text-primary" [svgIcon]="'mat_solid:refresh'"></mat-icon>
+            </button>
+        </div>
+        <div class="flex shrink-0 items-center sm:mt-0 sm:ml-4 ">
+            <button mat-icon-button
+                mat-icon-button
+                
+                (click)="open()">
+                <mat-icon class="icon-size-6 text-primary" [svgIcon]="'mat_outline:filter_alt'"></mat-icon>
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!-- Bar search -->
+<ng-container *ngIf="appearance === 'bar'" class="relative">
+    <div
+        class="absolute inset-0 flex items-center shrink-0 z-99 bg-card max-h-fit mt-2"
+        *ngIf="opened"
+        @slideInRight
+        @slideOutRight>
+        <div class="flex flex-col w-full pl-10 pr-15 py-2">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="flex col-span-12 sm:col-span-6">
+                    <mat-form-field class="w-full fuse-mat-dense">
+                        <mat-label>Buscar</mat-label>
+                        <input 
+                        [formControl]="searchFilterControl" matInput placeholder="" 
+                        #barSearchFilterInput
+                        class="uppercase"
+                        >
+                        <!-- <input [formControl]="searchControl" matInput (keyup)="applyFilter($event)" placeholder="" #input> -->
+                        <mat-icon matSuffix class="icon-size-6" [svgIcon]="'mat_solid:search'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex col-span-12 sm:col-span-2">
+                    <mat-form-field class="w-full fuse-mat-dense">
+                        <mat-label>Desde</mat-label>
+                        <input
+                        [formControl]="dateFromFilterControl" matInput placeholder="" [matDatepicker]="picker1" [max]="dateTo">
+                        <mat-datepicker-toggle
+                            matSuffix
+                            [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="flex col-span-12 sm:col-span-2">
+                    <mat-form-field class="w-full fuse-mat-dense">
+                        <mat-label>Hasta</mat-label>
+                        <input
+                        [formControl]="dateToFilterControl" matInput placeholder="" [matDatepicker]="picker2" [min]="dateFrom">
+                        <mat-datepicker-toggle
+                            matSuffix
+                            [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="flex col-span-12 sm:col-span-2">
+                    <mat-form-field class="w-full fuse-mat-dense">
+                        <mat-label>Estado</mat-label>
+                        <input #inputstates
+                                type="text"
+                                placeholder=""
+                                matInput
+                                [formControl]="statusFilterControl"
+                                [matAutocomplete]="auto_states"
+                                class="uppercase"
+                            >
+                            <mat-autocomplete autoActiveFirstOption #auto_states="matAutocomplete">
+                                <ng-container *ngFor="let state of filteredOptionsStates | async">
+                                    <mat-option  class="divide-y" [value]="state.name" class="uppercase">
+                                        {{state.name}}
+                                    </mat-option>
+                                </ng-container>
+                            </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+            </div> 
+        </div>
+        <button
+            class="absolute top-1/2 right-2 sm:right-3 shrink-0 w-10 h-10 -mt-5 "
+            mat-icon-button
+            (click)="close()">
+            <mat-icon [svgIcon]="'heroicons_outline:x-mark'" class="text-primary"></mat-icon>
+        </button>
+        
+    </div>
+</ng-container>

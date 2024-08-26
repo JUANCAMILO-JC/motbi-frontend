@@ -1,0 +1,7 @@
+export interface PCarMark {
+    id:        number;
+    name:      string;
+    status:    string;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
